@@ -1,0 +1,9 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+hola:
+    path: /hola
+    controller: App\Controller\DefaultController::hola
