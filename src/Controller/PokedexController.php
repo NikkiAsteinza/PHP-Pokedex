@@ -4,18 +4,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\HttpClient;
 
+
 class PokedexController extends AbstractController{
 
-    #[Route("/")]
+    #[Route("/", name:"home")]
     public function home()
     {
         return $this->render(
             "home.html.twig"
         );
     }
-
-    #[Route("/kanto")]
-    public function kanto()
+    #[Route("/pokemon/{number}", methods:['GET'], name:"pokeDetail")]
+    public function getPokeDetail($number){
+        $pokeApiUrl = "https://pokeapi.co/api/v2/pokemon/".$number;
+        $client = HttpClient::create();
+        $response = $client->request(
+            'GET',
+            $pokeApiUrl
+        );
+        
+        $responseContent = $response->toArray();
+        //El dumper te para la ejecución
+        //dd($responseContent);
+        return $this->render(
+            "/pokemon/poke-detail.html.twig",
+            ["pokeData"=> $responseContent]
+        );
+    }
+    #[Route("/kanto/{title}", name:"kanto")]
+    public function kanto($title)
     {
         $offset = 0;
         $ammount =  151;
@@ -31,12 +48,12 @@ class PokedexController extends AbstractController{
         //dd($responseContent);
         return $this->render(
             "main.html.twig",
-            ["allPokemon"=> $responseContent, "offset"=>0]
+            ["allPokemon"=> $responseContent, "offset"=>$offset, "name"=>$title]
         );
     }
 
-    #[Route("/johto")]
-    public function johto()
+    #[Route("/johto/{title}", name:"johto")]
+    public function johto($title)
     {
         $offset = 151;
         $ammount =  100;
@@ -52,12 +69,12 @@ class PokedexController extends AbstractController{
         //dd($responseContent);
         return $this->render(
             "main.html.twig",
-            ["allPokemon"=> $responseContent, "offset"=>$offset]
+            ["allPokemon"=> $responseContent, "offset"=>$offset, "name"=>$title]
         );
     }
 
-    #[Route("/hoenn")]
-    public function hoenn()
+    #[Route("/hoenn/{title}", name:"hoenn")]
+    public function hoenn($title)
     {
         $offset = 251;
         $ammount =  135;
@@ -73,12 +90,12 @@ class PokedexController extends AbstractController{
         //dd($responseContent);
         return $this->render(
             "main.html.twig",
-            ["allPokemon"=> $responseContent, "offset"=>$offset]
+            ["allPokemon"=> $responseContent, "offset"=>$offset, "name"=> $title]
         );
     }
 
-    #[Route("/sinnoh")]
-    public function sinnoh()
+    #[Route("/sinnoh/{title}", name:"sinnoh")]
+    public function sinnoh($title)
     {
         $offset = 386;
         $ammount = 107;
@@ -94,12 +111,12 @@ class PokedexController extends AbstractController{
         //dd($responseContent);
         return $this->render(
             "main.html.twig",
-            ["allPokemon"=> $responseContent, "offset"=>$offset]
+            ["allPokemon"=> $responseContent, "offset"=>$offset, "name"=>$title]
         );
     }
 
-    #[Route("/unova")]
-    public function unova()
+    #[Route("/unova/{title}", name:"unova")]
+    public function unova($title)
     {
         $offset = 493;
         $ammount =  156;
@@ -115,12 +132,12 @@ class PokedexController extends AbstractController{
         //dd($responseContent);
         return $this->render(
             "main.html.twig",
-            ["allPokemon"=> $responseContent, "offset"=>$offset]
+            ["allPokemon"=> $responseContent, "offset"=>$offset, "name"=>$title]
         );
     }
 
-    #[Route("/kalos")]
-    public function kalos()
+    #[Route("/kalos/{title}", name:"kalos")]
+    public function kalos($title)
     {
         $offset = 549;
         $ammount =  72;
@@ -136,12 +153,12 @@ class PokedexController extends AbstractController{
         //dd($responseContent);
         return $this->render(
             "main.html.twig",
-            ["allPokemon"=> $responseContent, "offset"=>$offset]
+            ["allPokemon"=> $responseContent, "offset"=>$offset, "name"=>$title]
         );
     }
 
-    #[Route("/alola")]
-    public function alola()
+    #[Route("/alola/{title}", name:"alola")]
+    public function alola($title)
     {
         $offset = 621;
         $ammount =  72;
@@ -157,12 +174,12 @@ class PokedexController extends AbstractController{
         //dd($responseContent);
         return $this->render(
             "main.html.twig",
-            ["allPokemon"=> $responseContent, "offset"=>$offset]
+            ["allPokemon"=> $responseContent, "offset"=>$offset, "name"=>$title]
         );
     }
 
-    #[Route("/galar")]
-    public function galar()
+    #[Route("/galar/{title}", name:"galar")]
+    public function galar($title)
     {
         $offset = 693;
         $ammount =  103;
@@ -178,12 +195,12 @@ class PokedexController extends AbstractController{
         //dd($responseContent);
         return $this->render(
             "main.html.twig",
-            ["allPokemon"=> $responseContent, "offset"=>$offset]
+            ["allPokemon"=> $responseContent, "offset"=>$offset, "name"=>$title]
         );
     }
 
-    #[Route("/paldea")]
-    public function paldea()
+    #[Route("/paldea/{title}", name:"paldea")]
+    public function paldea($title)
     {
         $offset = 693;
         $ammount =  103;
@@ -199,14 +216,14 @@ class PokedexController extends AbstractController{
         //dd($responseContent);
         return $this->render(
             "main.html.twig",
-            ["allPokemon"=> $responseContent, "offset"=>$offset]
+            ["allPokemon"=> $responseContent, "offset"=>$offset, "name"=>$title]
         );
     }
 
-    #[Route("/pokemon")]
-    public function GetPokemon()
-    {
-        return $this->render("home.html.twig");
-    }
+    // #[Route("/pokemon")]
+    // public function GetPokemon()
+    // {
+    //     return $this->render("home.html.twig");
+    // }
 }
 ?>

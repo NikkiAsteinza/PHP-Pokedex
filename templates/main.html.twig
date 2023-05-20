@@ -1,15 +1,22 @@
 {% extends 'base.html.twig' %}
 {% block title %} Pokedex - N13 {% endblock %}
 {% block content %}
-<ol id="pokedex" class="m-0 p-0 text-center">
+<div class="m-4 p-2 text-center jumbotron jumbotron-fluid rounded" style="background-color: rgba(0,204,221,1);">
+  <div class="pl-3">
+    <h1 class="display-5">{{name}}</h1>
+  </div>
+</div>
+<ol id="pokedex" class="m-0 p-0 text-center overflow-auto pb-5" style="height: 75vh;box-sizing:border-box;">
     {% for pokemon in allPokemon.results %}
         <li class="d-inline-flex m-3">
         <div class="card" style="width: 10rem;">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ offset + loop.index}}.png" class="card-img-top" alt="...">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ offset + loop.index}}.png" class="card-img-top" alt="{{ pokemon.name }} image">
             <div class="card-body">
                 <p>{{offset + loop.index}}</p>
                 <h5 class="card-title">{{ pokemon.name }}</h5>
-                <a href="#" class="btn btn-primary">More</a>
+                <a href="{{path(
+                        'pokeDetail',{'number': offset + loop.index})
+                         }}" class="btn btn-primary">More</a>
             </div>
         </div>
         </li>

@@ -1,5 +1,28 @@
 {% extends 'base.html.twig' %}
 {% block title %} Pokedex - N13 {% endblock %}
 {% block content %}
-<h2>Welcome to the new pokedex</h2>
+
+<div class="border p-0 overflow-auto bg-dark rounded" style="box-sizing:boder-box;width:100%;height:600px; margin:20px auto;">
+    <div id="pokeMap" class=" border p-0 overflow-hidden" style="width:972px;height:754px;margin:0 auto;">
+    <img width="972" height="754" src="resources/world-map.png" class="d-block" style="position:relative; z-index:0"/>
+    <a href="{{ path('kanto',{'title':'Kanto'}) }}" class="btn btn-dark" style="color:white;display:inline-block; position:relative; top:-260px; left:63%; z-index:1">Kanto</a>
+    <a href="{{ path('johto',{'title':'Johto'}) }}" class="btn btn-dark" style="color:white;display:inline-block; position:relative; top:-240px; left:45%; z-index:1">Johto</a>
+    <a href="{{ path('hoenn',{'title':'Hoenn'}) }}" class="btn btn-dark" style="color:white;display:inline-block; position:relative; top:-170px; left:24%; z-index:1">Hoenn</a>
+    <a href="{{ path('sinnoh',{'title':'Sinnoh'}) }}" class="btn btn-dark" style="color:white;display:inline-block; position:relative; top:-560px; left:52%; z-index:1">Sinnoh</a>
+    <a href="{{ path('unova',{'title':'Unova'}) }}" class="btn btn-dark" style="color:white;display:inline-block; position:relative; top:-400px; left:-8%; z-index:1">Unova</a>
+    <a href="{{ path('kalos',{'title':'Kalos'}) }}" class="btn btn-dark" style="color:white;display:inline-block; position:relative; top:-470px; left:-18%; z-index:1">Kalos</a>
+    <a href="{{ path('alola',{'title':'Alola'}) }}" class="btn btn-dark" style="color:white;display:inline-block; position:relative; top:-50px; left:-10%; z-index:1">Alola</a>
+    <a href="{{ path('galar',{'title':'Galar'}) }}" class="btn btn-dark" style="color:white;display:inline-block; position:relative; top:-700px; left:-45%; z-index:1">Galar</a>
+    <a href="{{ path('paldea',{'title':'Paldea'}) }}" class="btn btn-dark" style="color:white;display:inline-block; position:relative; top:-270px; left:-50%; z-index:1">Paldea</a>
+    <div>
+</div>
+</div>
+</div>
+<div class="m-4 p-2 text-center jumbotron jumbotron-fluid rounded" style="background-color: rgba(0,204,221,1);">
+  <div class="pl-3">
+    <h1 class="display-5">Explore by regions</h1>
+    <p class="lead">Click onn the map.</p>
+  </div>
+</div>
+<canvas id="canvas" class="d-none" width="460" height="460"></canvas>
 {% endblock %}
